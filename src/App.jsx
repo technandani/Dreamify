@@ -11,6 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Post />} />
         <Route path="/create" element={<Create />} />
+        <Route path="/cheak" element={<Create />} />
       </Routes>
     </Router>
     </>

@@ -63,7 +63,7 @@ const ImageCard = () => {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/images");
+      const res = await axios.get("https://dreamify-backend.vercel.app/images");
       setImages(res.data);
     } catch (err) {
       console.error("Error fetching images:", err);
