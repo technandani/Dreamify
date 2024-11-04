@@ -12,8 +12,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Post />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/create" element={<Create />} />
-        <Route path="/nav" element={<Navbar />} />
       </Routes>
     </Router>
     </>
