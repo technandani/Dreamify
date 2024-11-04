@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import "./App.css";
 import Post from "./pages/Post";
 import Create from "./pages/Create";
+import Navbar from "./pages/Navbar";
 
 const App = () => {
   return (
@@ -11,7 +12,6 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Post />} />
         <Route path="/create" element={<Create />} />
-        <Route path="/cheak" element={<Create />} />
       </Routes>
     </Router>
     </>
