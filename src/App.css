@@ -1,0 +1,268 @@
+* {
+  padding: 0;
+  margin: 0;
+  border: none;
+  text-decoration: none;
+  outline: none;
+  list-style: none;
+  color: #fff;
+}
+
+body {
+  background-color: #0c1821;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+header {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, 0.45) 0px 5px 15px -5px;
+}
+
+.logo {
+  font-size: 35px;
+  font-family: "Kaushan Script", cursive;
+  padding-left: 7vmin;
+}
+
+.btns {
+  display: flex;
+  gap: 15px;
+  padding-right: 7vmin;
+  transition: all 0.3s ease;
+}
+
+.btn {
+  height: 42px;
+  font-size: 20px;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #1b2a41;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #253b50;
+}
+
+.responsiveMenu {
+  display: none;
+  font-size: 35px;
+  padding-right: 7vmin;
+  cursor: pointer;
+}
+
+#cutMenu {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  .logo {
+    font-size: 30px;
+  }
+
+  .responsiveMenu {
+    display: block;
+  }
+
+  .btns {
+    display: none;
+  }
+
+  .btns.active {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: #0c1821;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    gap: 30px;
+    transition: opacity 0.3s ease;
+  }
+
+  .btn {
+    padding: 20px;
+  }
+
+  #cutMenu {
+    display: block;
+  }
+}
+
+
+
+/* post page css */
+
+.mainConatiner{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.searchContainer{
+    margin: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.searchContainer h2{
+    font-size: 45px;
+    text-align: center;
+}
+
+h2 div{
+    color: #1b2a41;
+    margin: 10px;
+}
+
+.searchBox{
+    height: 45px;
+    background-color: #253b50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    gap: 5px;
+    width: 40vw;
+}
+
+.searchBox input{
+    height: 100%;
+    width: 95%;
+    background-color: transparent;
+}
+
+::placeholder{
+    color: #ccc;
+}
+
+
+/* post card css */
+
+
+
+
+/* create post css */
+
+.title{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.title h2{
+  font-size: 40px;
+  font-weight: 500;
+}
+
+.title p{
+  font-size: 20px;
+  font-weight: 300;
+}
+
+.input{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input input{
+  width: 94%;
+  text-align: start;
+  height: 30vmin;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: transparent;
+  box-shadow: 0 0 5px #253b50;
+}
+
+.inputBox{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.CreatePostBtns{
+  display: flex;
+  justify-content: space-between;
+}
+
+.CreatePostBtn{
+  width: 45%;
+  box-shadow: 0 0 5px #253b50;
+  background-color: transparent;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 500;
+  border-radius: 20px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.createdImg{
+  border-radius: 20px;
+  min-height: 65vmin;
+}
+
+.createdImg img{
+  height: 100%;
+  width: 100%;
+  border-radius: 20px;
+}
+
+@media (min-width: 700px) and (max-width: 1250px){
+
+  .title h2{
+    font-size: 30px;
+  }
+  
+  .title p{
+    font-size: 15px;
+  }
+
+  .input textarea{
+    height: 15vmin;
+    width: 93%;
+  }
+
+  .CreatePostBtn{
+    width: 45%;
+    height: 50px;
+    font-size: 2vmin;
+    font-weight: 400;
+    border-radius: 15px;
+  }
+
+}
+
+@media (max-width: 699px) {
+   .CreatePostBtn{
+    font-size: 18px;
+    width: 48%;
+    height: 50px;
+   }
+}
