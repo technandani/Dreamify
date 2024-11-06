@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className="navRight">
           <div className="responsiveMenu" onClick={toggleMenu}>
-            <i className="fa-solid fa-bars" style={{ color: "#fff" }}></i>
+              
           </div>
           <div className={`btns ${menuOpen ? "active" : ""}`}>
             <a
@@ -39,7 +39,7 @@ const Navbar = () => {
               </a>
             </button>
             <button className="btn">
-              <a href="#">
+              <a href="/login">
                 <i className="fa-solid fa-user" style={{ color: "#fff" }}></i>{" "}
                 SignIn/Login
               </a>

@@ -59,7 +59,6 @@ const ImageCard = () => {
   const [images, setImages] = useState([]);
   const [Loading, setLoading] = useState("true");
 
-  // Fetch images from the backend
   const fetchImages = async () => {
     setLoading(true);
     try {
@@ -78,7 +77,7 @@ const ImageCard = () => {
   return (
     <>
       {images.length === 0 ? (
-        <p>No images found</p>
+        <p></p>
       ) : (
         images.map((image, index) => (
           <Card>

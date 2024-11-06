@@ -8,6 +8,10 @@
   color: #fff;
 }
 
+button{
+  cursor: pointer;
+}
+
 body {
   background-color: #0c1821;
   overflow-x: hidden;
@@ -60,9 +64,10 @@ header {
 
 .responsiveMenu {
   display: none;
-  font-size: 35px;
+  font-size: 30px;
   padding-right: 7vmin;
   cursor: pointer;
+  font-weight: 200;
 }
 
 #cutMenu {
@@ -86,13 +91,14 @@ header {
     display: flex;
     flex-direction: column;
     position: fixed;
-    top: 0;
+    top: 0px;
     left: 0;
     height: 100vh;
     width: 100vw;
     background-color: #0c1821;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    padding-top: 30vh;
     z-index: 999;
     gap: 30px;
     transition: opacity 0.3s ease;
@@ -107,87 +113,105 @@ header {
   }
 }
 
-
-
 /* post page css */
 
-.mainConatiner{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+.mainConatiner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
-.searchContainer{
-    margin: 100px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+.searchContainer {
+  margin: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
 }
 
-.searchContainer h2{
-    font-size: 45px;
-    text-align: center;
+.searchContainer h2 {
+  font-size: 45px;
+  text-align: center;
 }
 
-h2 div{
-    color: #1b2a41;
-    margin: 10px;
+h2 div {
+  color: #1b2a41;
+  margin: 10px;
 }
 
-.searchBox{
-    height: 45px;
-    background-color: #253b50;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    gap: 5px;
-    width: 40vw;
+.searchBox {
+  height: 45px;
+  background-color: #253b50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  gap: 5px;
+  width: 40vw;
 }
 
-.searchBox input{
-    height: 100%;
-    width: 95%;
-    background-color: transparent;
+.searchBox input {
+  height: 100%;
+  width: 95%;
+  background-color: transparent;
 }
 
-::placeholder{
-    color: #ccc;
+::placeholder {
+  color: #ccc;
 }
 
+@media (min-width: 700px) and (max-width: 1250px) {
+  .searchContainer h2 {
+    font-size: 35px;
+  }
+
+  .searchBox {
+    width: 80%;
+  }
+}
+
+@media (max-width: 700px){
+  .searchContainer h2 {
+    font-size: 25px;
+  }
+
+  .searchBox {
+    width: 90%;
+  }
+
+  .searchContainer {
+    margin: 50px 10px 20px 10px;
+  }
+}
 
 /* post card css */
 
-
-
-
 /* create post css */
 
-.title{
+.title {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.title h2{
-  font-size: 40px;
+.title h2 {
+  font-size: 35px;
   font-weight: 500;
 }
 
-.title p{
-  font-size: 20px;
+.title p {
+  font-size: 18px;
   font-weight: 300;
 }
 
-.input{
+.input {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
-.input input{
+.input input {
   width: 94%;
   text-align: start;
   height: 30vmin;
@@ -197,18 +221,18 @@ h2 div{
   box-shadow: 0 0 5px #253b50;
 }
 
-.inputBox{
+.inputBox {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
-.CreatePostBtns{
+.CreatePostBtns {
   display: flex;
   justify-content: space-between;
 }
 
-.CreatePostBtn{
+.CreatePostBtn {
   width: 45%;
   box-shadow: 0 0 5px #253b50;
   background-color: transparent;
@@ -223,46 +247,140 @@ h2 div{
   cursor: pointer;
 }
 
-.createdImg{
+.createdImg {
   border-radius: 20px;
   min-height: 65vmin;
 }
 
-.createdImg img{
+.createdImg img {
   height: 100%;
   width: 100%;
   border-radius: 20px;
 }
 
-@media (min-width: 700px) and (max-width: 1250px){
-
-  .title h2{
+@media (min-width: 700px) and (max-width: 1250px) {
+  .title h2 {
     font-size: 30px;
   }
-  
-  .title p{
+
+  .title p {
     font-size: 15px;
   }
 
-  .input textarea{
+  .input textarea {
     height: 15vmin;
     width: 93%;
   }
 
-  .CreatePostBtn{
+  .CreatePostBtn {
     width: 45%;
     height: 50px;
     font-size: 2vmin;
     font-weight: 400;
     border-radius: 15px;
   }
-
 }
 
 @media (max-width: 699px) {
-   .CreatePostBtn{
+  .title h2 {
+    font-size: 25px;
+  }
+
+  .title p {
+    font-size: 12px;
+  }
+
+  .CreatePostBtn {
     font-size: 18px;
     width: 48%;
     height: 50px;
-   }
+  }
+}
+
+/* login page css */
+
+.loginContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  margin: 20px;
+}
+
+.loginContainer form {
+  width: 65vmin;
+  box-shadow: 0 0 2px #253b50;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 30px;
+}
+
+.authInput {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.authInput input,
+.authInput button {
+  width: 100%;
+  height: 35px;
+  background-color: #0c1821;
+  box-shadow: 0 0 5px #253b50;
+  border-radius: 10px;
+}
+
+.authInput input{
+  padding-left: 10px;
+  width: 97%;
+}
+
+.authInput button {
+  background-color: #253b50;
+  font-size: 22px;
+}
+
+.inputBox {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.forgotBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+}
+
+.forgotBox button {
+  background-color: transparent;
+  padding: 10px 20px;
+  box-shadow: 0 0 5px #253b50;
+  border-radius: 20px;
+}
+
+.forgotBox span {
+  color: gold;
+  font-weight: 600;
+}
+
+.googleBox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.googleicon img {
+  height: 22px;
+}
+
+@media (max-width: 699px) {
+  .loginContainer form {
+    box-shadow: none;
+    width: 90vw;
+  }
 }
