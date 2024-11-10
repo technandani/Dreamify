@@ -35,6 +35,7 @@ opacity: 0;
     gap: 5px;
     backdrop-filter: blur(8px);
     background-color: #253b5070;
+    transition: opacity 0.3s ease-in;
 
     ${Card}:hover & {
       opacity: 1;
@@ -54,7 +55,11 @@ const Author = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  font-size: 20px;
+  font-size: 17px;
+
+  @media (max-width: 699px) {
+    font-size: 13px;
+  }
 `;
 const DownloadBtn = styled.div`
   cursor: pointer;
@@ -108,7 +113,7 @@ const ImageCard = () => {
                   <img
                     src="images/download.png"
                     alt=""
-                    style={{ height: "25px" }}
+                    style={{ height: "22px" }}
                   />
                 </DownloadBtn>
               </BottomWrapper>

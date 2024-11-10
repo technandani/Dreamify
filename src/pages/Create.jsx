@@ -70,7 +70,7 @@ const Create = () => {
     try {
       // Send prompt to backend to generate image
       const response = await axios.get(
-        `https://dreamify-backend.vercel.app/generate-image?prompt=${encodeURIComponent(
+        `http://localhost:5000/generate-image?prompt=${encodeURIComponent(
           prompt
         )}`
       );
