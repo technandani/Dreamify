@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { styled } from "styled-components";
 import axios from "axios";
 import Navbar from "./Navbar";
+import FileSaver from "file-saver";
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,14 +37,18 @@ const WrapperLeft = styled.div`
 
 const WrapperRight = styled.div`
   width: 75vmin;
-  border: dashed gold 2px;
-  padding: 15px;
   border-radius: 20px;
-
   @media (max-width: 699px) {
     width: 100%;
   }
 `;
+
+const DownloadBtn = styled.div`
+  cursor: pointer;
+  width: auto;
+  float: right;
+`;
+
 
 const Create = () => {
   const [prompt, setPrompt] = useState(""); // State for prompt input
@@ -134,14 +139,22 @@ const Create = () => {
           </WrapperLeft>
 
           <WrapperRight>
-            {/* Display the generated image in the image box */}
             <div className="createdImg">
               {generatedImage ? (
-                <img
+                <div className="downladBox">
+                  <img
                   src={generatedImage}
                   alt="Generated"
                   style={{ width: "100%", borderRadius: "20px" }}
                 />
+                <DownloadBtn onClick={() => FileSaver.saveAs(generatedImage, "download.jpg")}>
+                <img
+                  src="images/download.png"
+                  alt=""
+                  style={{ height: "25px", width: "auto" , position: "relative", top: "-50px", right: "30px"}}
+                />
+              </DownloadBtn>
+                </div>
               ) : (
                 <p></p>
               )}

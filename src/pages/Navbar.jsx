@@ -32,7 +32,7 @@ const Navbar = () => {
             <button className="btn">
               <a href="/create">
                 <i className="fa-solid fa-plus" style={{ color: "#fff" }}></i>{" "}
-                Generate
+                Generate image
               </a>
             </button>
             <button className="btn">

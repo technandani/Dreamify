@@ -2,26 +2,25 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { styled } from "styled-components";
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import FileSaver from "file-saver";
 
 const Card = styled.div`
   position: relative;
   display: flex;
-  cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 15px;
   &:hover {
     /* scale: 1.05; */
   }
-
+  
   &:nth-child(7n + 1) {
     grid-column: auto/span 2;
     grid-row: auto/span 2;
   }
-`;
+  `;
 
 const HoverOverlay = styled.div`
-  display: none;
-  &:hover {
+opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
@@ -29,12 +28,17 @@ const HoverOverlay = styled.div`
     right: 0;
     display: flex;
     flex-direction: column;
+    justify-content: end;
     align-items: start;
-    border-radius: 20px;
-    padding: 30px;
-    gap: 2%px;
+    padding: 5%;
+    border-radius: inherit;
+    gap: 5px;
     backdrop-filter: blur(8px);
-  }
+    background-color: #253b5070;
+
+    ${Card}:hover & {
+      opacity: 1;
+    }
 `;
 
 const Prompt = styled.div`
@@ -52,7 +56,9 @@ const Author = styled.div`
   gap: 5px;
   font-size: 20px;
 `;
-const DownloadBtn = styled.div``;
+const DownloadBtn = styled.div`
+  cursor: pointer;
+`;
 
 const ImageCard = () => {
   const [prompt, setPrompt] = useState("");
@@ -92,17 +98,17 @@ const ImageCard = () => {
               <BottomWrapper>
                 <Author>
                   <img
-                    src="images/user.png"
+                    src="images/woman.png"
                     alt=""
                     style={{ height: "25px" }}
                   />
                   Nandani
                 </Author>
-                <DownloadBtn>
+                <DownloadBtn onClick={() => FileSaver.saveAs(image.url, "download.jpg")}>
                   <img
                     src="images/download.png"
                     alt=""
-                    style={{ height: "40px" }}
+                    style={{ height: "25px" }}
                   />
                 </DownloadBtn>
               </BottomWrapper>
