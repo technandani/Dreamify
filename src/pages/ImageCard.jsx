@@ -70,7 +70,11 @@ const ImageCard = ({ images }) => {
   return (
     <>
       {images.length === 0 ? (
-        <p>Loading...</p>
+        <div className="loaderBox">
+          <div className="loader">
+            <img src="images/loader.gif" alt="" />
+          </div>
+        </div>
       ) : (
         images.map((image, index) => (
           <Card key={image.url}> {/* Added key here */}
