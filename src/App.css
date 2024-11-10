@@ -45,17 +45,17 @@ header {
 }
 
 .btn {
-  height: 42px;
-  font-size: 20px;
   border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  padding: 10px 20px;
   background-color: #1b2a41;
   color: #fff;
   cursor: pointer;
+  height: 45px;
+  width: 200px;
+  font-size: 22px;
 }
 
 .btn:hover {
@@ -67,7 +67,6 @@ header {
   font-size: 30px;
   padding-right: 7vmin;
   cursor: pointer;
-  font-weight: 200;
 }
 
 #cutMenu {
@@ -80,7 +79,9 @@ header {
   }
 
   .responsiveMenu {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .btns {
@@ -105,7 +106,9 @@ header {
   }
 
   .btn {
-    padding: 20px;
+    height: 60px;
+    width: 250px;
+    font-size: 22px;
   }
 
   #cutMenu {
@@ -153,15 +156,17 @@ h2 div {
 
 .searchBox input {
   height: 100%;
-  width: 95%;
+  width: 100%;
   background-color: transparent;
 }
 
-::placeholder {
+::placeholder{
+  padding: 10px;
   color: #ccc;
 }
 
 @media (min-width: 700px) and (max-width: 1250px) {
+
   .searchContainer h2 {
     font-size: 35px;
   }
@@ -172,12 +177,13 @@ h2 div {
 }
 
 @media (max-width: 700px){
+
   .searchContainer h2 {
     font-size: 25px;
   }
 
   .searchBox {
-    width: 90%;
+    width: 100%;
   }
 
   .searchContainer {
@@ -202,7 +208,8 @@ h2 div {
 
 .title p {
   font-size: 18px;
-  font-weight: 300;
+  font-weight: 200;
+  color: #eee;
 }
 
 .input {
@@ -211,14 +218,14 @@ h2 div {
   gap: 10px;
 }
 
-.input input {
+.input textarea {
   width: 94%;
   text-align: start;
   height: 30vmin;
   padding: 20px;
   border-radius: 20px;
   background-color: transparent;
-  box-shadow: 0 0 5px #253b50;
+  box-shadow: 0 0 3px #253b50;
 }
 
 .inputBox {
@@ -234,7 +241,7 @@ h2 div {
 
 .CreatePostBtn {
   width: 45%;
-  box-shadow: 0 0 5px #253b50;
+  box-shadow: 0 0 3px #253b50;
   background-color: transparent;
   height: 60px;
   display: flex;
@@ -287,13 +294,38 @@ h2 div {
   }
 
   .title p {
-    font-size: 12px;
+    font-size: 15px;
   }
 
-  .CreatePostBtn {
+  .inputTitle{
     font-size: 18px;
-    width: 48%;
-    height: 50px;
+    font-weight: 500;
+  }
+
+  .input textarea {
+    width: 90%;
+    text-align: start;
+    height: 30vmin;
+    padding-left: 10px;
+    border-radius: 10px;
+    background-color: transparent;
+    box-shadow: 0 0 2px #253b50;
+  }
+
+  .CreatePostBtns {
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .CreatePostBtn {
+    width: 100%;
+    box-shadow: 0 0 2px #253b50;
+    font-size: 20px;
+    font-weight: 500;
+    border-radius: 10px;
+    gap: 10px;
   }
 }
 
@@ -328,7 +360,7 @@ h2 div {
   width: 100%;
   height: 35px;
   background-color: #0c1821;
-  box-shadow: 0 0 5px #253b50;
+  box-shadow: 0 0 3px #253b50;
   border-radius: 10px;
 }
 
@@ -359,7 +391,7 @@ h2 div {
 .forgotBox button {
   background-color: transparent;
   padding: 10px 20px;
-  box-shadow: 0 0 5px #253b50;
+  box-shadow: 0 0 3px #253b50;
   border-radius: 20px;
 }
 
@@ -379,8 +411,33 @@ h2 div {
 }
 
 @media (max-width: 699px) {
+.loginContainer{
+  margin: 0;
+}
+
   .loginContainer form {
     box-shadow: none;
-    width: 90vw;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .authInput button, .authInput input{
+    box-shadow: 0 0 2px #253b50;
+    height: 40px;
+  }
+
+  .authInput .submit{
+    font-size: 20px;
+  }
+
+  .google{
+    font-size: 15px;
+  }
+
+  .forgotBox button {
+    background-color: transparent;
+    padding: 10px 30px;
+    box-shadow: 0 0 2px #253b50;
+    border-radius: 20px;
   }
 }

@@ -21,17 +21,19 @@ const CardWrapper = styled.div`
   gap: 20px;
   width: 100%;
   padding: 20px;
-
+  
   @media (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
-
+  
   @media (min-width: 640) and (max-width: 1199px) {
     grid-template-columns: repeat(3, 1fr);
   }
-
+  
   @media (max-width: 639px) {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 10px;
   }
 `;
 
@@ -53,7 +55,7 @@ const Post = () => {
             />
             <input
               type="search"
-              placeholder="Enter you prompt for your image....."
+              placeholder="Search image by keywords....."
             />
           </div>
         </div>

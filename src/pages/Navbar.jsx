@@ -18,7 +18,7 @@ const Navbar = () => {
         </div>
         <div className="navRight">
           <div className="responsiveMenu" onClick={toggleMenu}>
-              
+              <img src="images/menu.png" alt="menu" height={'22px'}/>
           </div>
           <div className={`btns ${menuOpen ? "active" : ""}`}>
             <a
@@ -27,10 +27,7 @@ const Navbar = () => {
               onClick={toggleMenu}
               style={{ display: menuOpen ? "block" : "none" }}
             >
-              <i
-                className="fa-solid fa-xmark"
-                style={{ color: "#fff", fontSize: "40px" }}
-              ></i>
+             <img src="images/cut.png" alt="menu" height={'30px'}/>
             </a>
             <button className="btn">
               <a href="/create">
@@ -41,7 +38,7 @@ const Navbar = () => {
             <button className="btn">
               <a href="/login">
                 <i className="fa-solid fa-user" style={{ color: "#fff" }}></i>{" "}
-                SignIn/Login
+                SignIn / Login
               </a>
             </button>
           </div>

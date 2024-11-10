@@ -27,9 +27,10 @@ const WrapperLeft = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-
+  
   @media (max-width: 699px) {
-    width: 100%;
+    width: 92vmin;
+    padding: 0px;
   }
 `;
 
@@ -40,7 +41,7 @@ const WrapperRight = styled.div`
   border-radius: 20px;
 
   @media (max-width: 699px) {
-    width: 98%;
+    width: 100%;
   }
 `;
 
@@ -98,12 +99,11 @@ const Create = () => {
               <div className="inputBox">
                 <div className="input">
                   <div className="inputTitle">Image Prompt</div>
-                  <input
+                  <textarea
                     type="text"
                     value={prompt}
                     onChange={handlePromptChange}
-                    placeholder="Enter image prompt"
-                  />
+                  ></textarea>
                 </div>
                 <div className="CreatePostBtns">
                   <button
