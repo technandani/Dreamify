@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import ImageCard from "./ImageCard";
 import Navbar from "./Navbar";
+import axios from "axios";
 
 const Container = styled.div`
   /* width: 100%; */
@@ -21,15 +22,15 @@ const CardWrapper = styled.div`
   gap: 20px;
   width: 100%;
   padding: 20px;
-  
+
   @media (min-width: 1200px) {
     grid-template-columns: repeat(4, 1fr);
   }
-  
-  @media (min-width: 640) and (max-width: 1199px) {
+
+  @media (min-width: 640px) and (max-width: 1199px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   @media (max-width: 639px) {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
@@ -38,6 +39,24 @@ const CardWrapper = styled.div`
 `;
 
 const Post = () => {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchImages = async () => {
+    setLoading(true);
+    try {
+      const res = await axios.get("https://dreamify-backend.vercel.app/images");
+      setImages(res.data);
+    } catch (err) {
+      console.error("Error fetching images:", err);
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    fetchImages();
+  }, []);
+
   return (
     <>
       <Navbar />
@@ -61,7 +80,7 @@ const Post = () => {
         </div>
         <Wrapper>
           <CardWrapper>
-            <ImageCard />
+            <ImageCard images={images} />
           </CardWrapper>
         </Wrapper>
       </div>
