@@ -1,17 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "./Navbar";
+import axios from "axios";
 
 const Wrapper = styled.div``;
-const CardWrapper = styled.div``;
 
-const login = () => {
+const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/users/login", 
+        { email, password },
+        { withCredentials: true }
+      );
+
+      if (response.status === 200) {
+        setEmail("");
+        setPassword("");
+        navigate("/create"); 
+        window.location.reload();
+      } else {
+        setError("Login failed. Please try again.");
+      }
+    } catch (error) {
+      setError("Invalid email or password.");
+    }
+  };
+
   return (
     <>
       <Navbar />
       <Wrapper>
         <div className="loginContainer">
-          <form action="">
+          <form onSubmit={handleSubmit}>
             <div className="title">
               <h2>Welcome to Dreamify</h2>
               <p>
@@ -22,26 +50,33 @@ const login = () => {
             <div className="inputBox">
               <div className="authInput">
                 <div className="inputTitle">Email</div>
-                <input type="text" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
               </div>
               <div className="authInput">
                 <div className="inputTitle">Password</div>
-                <input type="text" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="authInput">
-                <button className="submit">SignIn</button>
+                <button className="submit" type="submit">
+                  SignIn
+                </button>
               </div>
             </div>
             <div className="forgotBox">
               <p>
-                New to Dreamify ? <a href="/register"><span>SignUp</span></a>
+                New to Dreamify?{" "}
+                <a href="/register">
+                  <span>SignUp</span>
+                </a>
               </p>
-              <button className="googleBox">
-                <div className="googleicon">
-                    <img src="images/google.png" alt="" />
-                </div>
-                <div className="google">SignIn with Google</div>
-              </button>
             </div>
           </form>
         </div>
@@ -50,4 +85,4 @@ const login = () => {
   );
 };
 
-export default login;
+export default Login;

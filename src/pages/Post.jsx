@@ -40,13 +40,16 @@ const CardWrapper = styled.div`
 
 const Post = () => {
   const [images, setImages] = useState([]);
+  const [postImages, setpostImages] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("https://dreamify-backend.vercel.app/images");
+      const res = await axios.get("http://localhost:5000/posts/allPosts");
+      const postRes = await axios.get("http://localhost:5000/image/allImages");
       setImages(res.data);
+      setpostImages(postRes.data);
     } catch (err) {
       console.error("Error fetching images:", err);
     }
@@ -66,7 +69,7 @@ const Post = () => {
             Explore popular post in this community
             <div>@ created with AI @</div>
           </h2>
-          <div className="searchBox">
+          {/* <div className="searchBox">
             <img
               src="images/search.png"
               alt=""
@@ -76,11 +79,11 @@ const Post = () => {
               type="search"
               placeholder="Search image by keywords....."
             />
-          </div>
+          </div> */}
         </div>
         <Wrapper>
           <CardWrapper>
-            <ImageCard images={images} />
+            <ImageCard images={images} postImages={postImages} />
           </CardWrapper>
         </Wrapper>
       </div>

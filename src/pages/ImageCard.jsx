@@ -62,56 +62,142 @@ const Author = styled.div`
   }
 `;
 
+const ProfilePict = styled.div`
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 const DownloadBtn = styled.div`
   cursor: pointer;
 `;
 
-const ImageCard = ({ images }) => {
+const ImageCard = ({ images, postImages }) => {
   return (
     <>
-      {images.length === 0 ? (
+      {images.length === 0 && postImages.length === 0 ? (
         <div className="loaderBox">
           <div className="loader">
             <img src="images/loader.gif" alt="" />
           </div>
         </div>
       ) : (
-        images.map((image, index) => (
-          <Card key={image.url}> {/* Added key here */}
-            <LazyLoadImage
-              src={
-                image.url.startsWith("http://")
-                  ? image.url.replace("http://", "https://")
-                  : image.url
-              }
-              alt={`Generated image ${index}`}
-              width={"100%"}
-              style={{ borderRadius: "15px" }}
-            />
-            <HoverOverlay>
-              <Prompt>{image.prompt}</Prompt>
-              <BottomWrapper>
-                <Author>
-                  <img
-                    src="images/woman.png"
-                    alt=""
-                    style={{ height: "25px" }}
-                  />
-                  Nandani
-                </Author>
-                <DownloadBtn
-                  onClick={() => FileSaver.saveAs(image.url, "download.jpg")}
-                >
-                  <img
-                    src="images/download.png"
-                    alt=""
-                    style={{ height: "22px" }}
-                  />
-                </DownloadBtn>
-              </BottomWrapper>
-            </HoverOverlay>
-          </Card>
-        ))
+        <>
+          {/* Rendering images */}
+          {images.length > 0 &&
+            images.map((image, index) => (
+              <Card key={image.url}>
+                {" "}
+                {/* Added key here */}
+                <LazyLoadImage
+                  src={
+                    image.url.startsWith("http://")
+                      ? image.url.replace("http://", "https://")
+                      : image.url
+                  }
+                  alt={`Generated image ${index}`}
+                  width={"100%"}
+                />
+                <HoverOverlay>
+                  <Prompt>{image.prompt}</Prompt>
+                  <BottomWrapper>
+                    <Author>
+                      <ProfilePict>
+                        <img
+                          src={
+                            image.user.profilePic &&
+                            image.user.profilePic.startsWith("http://")
+                              ? image.user.profilePic.replace(
+                                  "http://",
+                                  "https://"
+                                )
+                              : image.user.profilePic || "images/woman.png" 
+                          }
+                          alt=""
+                          style={{
+                            height: "100%",
+                            width: "fit-content",
+                            maxWidth: "25px",
+                          }}
+                        />
+                      </ProfilePict>
+                      {image.user.name}
+                    </Author>
+                    <DownloadBtn
+                      onClick={() =>
+                        FileSaver.saveAs(image.url, "download.jpg")
+                      }
+                    >
+                      <img
+                        src="images/download.png"
+                        alt=""
+                        style={{ height: "22px" }}
+                      />
+                    </DownloadBtn>
+                  </BottomWrapper>
+                </HoverOverlay>
+              </Card>
+            ))}
+          {postImages.length > 0 &&
+            postImages.map((image, index) => (
+              <Card key={image.url}>
+                <LazyLoadImage
+                  src={
+                    image.url.startsWith("http://")
+                      ? image.url.replace("http://", "https://")
+                      : image.url
+                  }
+                  alt={`Generated image ${index}`}
+                  width={"100%"}
+                />
+                <HoverOverlay>
+                  <Prompt>{image.prompt}</Prompt>
+                  <BottomWrapper>
+                    <Author>
+                      <ProfilePict>
+                        <img
+                          src={
+                            image.user &&
+                            image.user.profilePic &&
+                            image.user.profilePic.startsWith("http://")
+                              ? image.user.profilePic.replace(
+                                  "http://",
+                                  "https://"
+                                )
+                              : (image.user && image.user.profilePic) ||
+                                "images/user.png" 
+                          }
+                          alt=""
+                          style={{
+                            height: "100%",
+                            width: "fit-content",
+                            maxWidth: "25px",
+                          }}
+                        />
+                      </ProfilePict>
+                      Nandani
+                    </Author>
+                    <DownloadBtn
+                      onClick={() =>
+                        FileSaver.saveAs(image.url, "download.jpg")
+                      }
+                    >
+                      <img
+                        src="images/download.png"
+                        alt=""
+                        style={{ height: "22px" }}
+                      />
+                    </DownloadBtn>
+                  </BottomWrapper>
+                </HoverOverlay>
+              </Card>
+            ))}
+        </>
       )}
     </>
   );

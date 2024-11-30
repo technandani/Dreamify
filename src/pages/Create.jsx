@@ -1,8 +1,11 @@
-import React, { useState } from "react";
-import { styled } from "styled-components";
+// src/Create.js
+import React, { useState, useEffect } from "react";
+import { useAuth } from "../context/AuthContext"; 
 import axios from "axios";
 import Navbar from "./Navbar";
 import FileSaver from "file-saver";
+import Modal from "./Modal";
+import styled from "styled-components";
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,7 +31,7 @@ const WrapperLeft = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
-  
+
   @media (max-width: 699px) {
     width: 92vmin;
     padding: 0px;
@@ -38,6 +41,7 @@ const WrapperLeft = styled.div`
 const WrapperRight = styled.div`
   width: 75vmin;
   border-radius: 20px;
+
   @media (max-width: 699px) {
     width: 100%;
   }
@@ -49,18 +53,24 @@ const DownloadBtn = styled.div`
   float: right;
 `;
 
+const getCookie = (name) => {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(";").shift();
+  return null;
+};
 
 const Create = () => {
-  const [prompt, setPrompt] = useState(""); // State for prompt input
-  const [generating, setGenerating] = useState(false); // State for loading indicator
-  const [generatedImage, setGeneratedImage] = useState(null); // State to store the generated image URL
+  const { isLoggedIn } = useAuth(); 
+  const [prompt, setPrompt] = useState(""); 
+  const [generating, setGenerating] = useState(false); 
+  const [generatedImage, setGeneratedImage] = useState(null); 
+  const [showLoginModal, setShowLoginModal] = useState(false);
 
-  // Handle prompt input change
   const handlePromptChange = (e) => {
     setPrompt(e.target.value);
   };
 
-  // Handle image generation submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!prompt) return;
@@ -68,17 +78,12 @@ const Create = () => {
     setGenerating(true);
 
     try {
-      // Send prompt to backend to generate image
       const response = await axios.get(
-        `https://dreamify-backend.vercel.app/generate-image?prompt=${encodeURIComponent(
-          prompt
-        )}`
+        `http://localhost:5000/image/generate-image?prompt=${encodeURIComponent(prompt)}`
       );
 
-      // Backend returns the generated image URL in response
       const imageUrl = response.data.imageUrl;
-      setGeneratedImage(imageUrl); // Set the generated image URL to state
-      setPrompt(""); // Reset the prompt input
+      setGeneratedImage(imageUrl); 
     } catch (err) {
       console.error("Error generating image:", err);
     }
@@ -86,17 +91,65 @@ const Create = () => {
     setGenerating(false);
   };
 
+  const handlePostImage = async () => {
+    if (!generatedImage) {
+      alert("Please generate an image first before posting.");
+      return;
+    }
+  
+    if (isLoggedIn) {
+      try {
+        const token = getCookie("uid");
+        console.log("Token from cookies:", token);
+
+        if (!token) {
+          console.error("No token found. User is not authenticated.");
+          return;
+        }
+  
+        const response = await axios.post(
+          "http://localhost:5000/posts/create-post",
+          {
+            url: generatedImage,
+            prompt: prompt,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,  
+            }
+          }
+        );
+        console.log("Image posted successfully:", response.data);
+        alert("Post created successfully");
+        setPrompt("");
+        setGeneratedImage(null);
+      } catch (err) {
+        console.error("Error posting image:", err);
+      }
+    } else {
+      setShowLoginModal(true); 
+    }
+  };
+  
+
+  const handleCloseModal = () => {
+    setShowLoginModal(false);
+  };
+
+  const handleLoginRedirect = () => {
+    window.location.href = "/login"; 
+  };
+
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Wrapper>
         <MainWrapper>
           <WrapperLeft>
             <div className="title">
               <h2>Generate image with prompt</h2>
               <p>
-                Create stunning images from your ideas instantly with
-                Dreamify's powerful AI generator.
+                Create stunning images from your ideas instantly with Dreamify's powerful AI generator.
               </p>
             </div>
 
@@ -124,14 +177,16 @@ const Create = () => {
                     {generating ? "Generating..." : "Generate Image"}
                   </button>
                   <button
-                    type="submit"
+                    type="button"
                     className="CreatePostBtn"
+                    onClick={handlePostImage}
                   >
                     <img
                       src="images/pen.png"
                       alt=""
                       style={{ height: "40px", rotate: "45deg" }}
-                    />Post Image
+                    />
+                    Post Image
                   </button>
                 </div>
               </div>
@@ -141,19 +196,19 @@ const Create = () => {
           <WrapperRight>
             <div className="createdImg">
               {generatedImage ? (
-                <div className="downladBox">
+                <div className="downloadBox">
                   <img
-                  src={generatedImage}
-                  alt="Generated"
-                  style={{ width: "100%", borderRadius: "20px" }}
-                />
-                <DownloadBtn onClick={() => FileSaver.saveAs(generatedImage, "download.jpg")}>
-                <img
-                  src="images/download.png"
-                  alt=""
-                  style={{ height: "25px", width: "auto" , position: "relative", top: "-50px", right: "30px"}}
-                />
-              </DownloadBtn>
+                    src={generatedImage}
+                    alt="Generated"
+                    style={{ width: "100%", borderRadius: "20px" }}
+                  />
+                  <DownloadBtn onClick={() => FileSaver.saveAs(generatedImage, "download.jpg")}>
+                    <img
+                      src="images/download.png"
+                      alt=""
+                      style={{ height: "25px", width: "auto", position: "relative", top: "-50px", right: "30px" }}
+                    />
+                  </DownloadBtn>
                 </div>
               ) : (
                 <p></p>
@@ -162,6 +217,14 @@ const Create = () => {
           </WrapperRight>
         </MainWrapper>
       </Wrapper>
+
+      {/* Login Modal */}
+      {showLoginModal && (
+        <Modal
+          onClose={handleCloseModal}
+          onLoginRedirect={handleLoginRedirect}
+        />
+      )}
     </>
   );
 };
