@@ -71,11 +71,19 @@ header {
   color: #fff;
   cursor: pointer;
   height: 45px;
-  width: 220px;
-  font-size: 22px;
+  width: 200px;
+  font-size: 18px;
 }
 
 .btn:hover {
+  background-color: #253b50;
+}
+
+#genBtn{
+  background-color: transparent;
+}
+
+#genBtn:hover{
   background-color: #253b50;
 }
 

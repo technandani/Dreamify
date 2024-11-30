@@ -27,7 +27,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/users/register", formData, {
+      const response = await axios.post("https://dreamify-backend.vercel.app/users/register", formData, {
         headers: {
           "Content-Type": "multipart/form-data", 
         },

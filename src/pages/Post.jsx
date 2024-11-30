@@ -46,8 +46,8 @@ const Post = () => {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/posts/allPosts");
-      const postRes = await axios.get("http://localhost:5000/image/allImages");
+      const res = await axios.get("https://dreamify-backend.vercel.app/posts/allPosts");
+      const postRes = await axios.get("https://dreamify-backend.vercel.app/image/allImages");
       setImages(res.data);
       setpostImages(postRes.data);
     } catch (err) {

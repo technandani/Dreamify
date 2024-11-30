@@ -30,7 +30,7 @@ const Navbar = () => {
           >
             <img src="images/cut.png" alt="close menu" height={"30px"} />
           </a>
-          <button className="btn">
+          <button className="btn" id="genBtn">
             <a href="/create">
               <i className="fa-solid fa-plus" style={{ color: "#fff" }}></i>{" "}
               Generate image
