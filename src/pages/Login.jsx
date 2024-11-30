@@ -18,7 +18,7 @@ const Login = () => {
       const response = await axios.post(
         "https://dreamify-backend.vercel.app/users/login", 
         { email, password },
-        { withCredentials: true }
+        { withCredentials: true } 
       );
 
       if (response.status === 200) {
@@ -31,6 +31,7 @@ const Login = () => {
       }
     } catch (error) {
       setError("Invalid email or password.");
+      console.error("Login error", error);
     }
   };
 
