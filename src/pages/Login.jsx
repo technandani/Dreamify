@@ -9,29 +9,28 @@ const Wrapper = styled.div``;
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const cookie = document.cookie;
+    if (cookie) {
+      console.log("Cookies:", cookie);
+    }
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
       const response = await axios.post(
         "https://dreamify-backend.vercel.app/users/login", 
         { email, password },
-        { withCredentials: true } 
+        { withCredentials: true }
       );
-
-      console.log('Cookies:', document.cookie);
-
-      useEffect(() => {
-        console.log(document.cookie);  
-      }, []);
 
       if (response.status === 200) {
         setEmail("");
         setPassword("");
-        // navigate("/create"); 
         window.location.reload();
       } else {
         setError("Login failed. Please try again.");
@@ -78,6 +77,7 @@ const Login = () => {
                 </button>
               </div>
             </div>
+            {error && <p>{error}</p>}
             <div className="forgotBox">
               <p>
                 New to Dreamify?{" "}
