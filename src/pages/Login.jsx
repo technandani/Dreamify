@@ -15,7 +15,7 @@ const Login = () => {
   useEffect(() => {
     const cookie = document.cookie;
     if (cookie) {
-      console.log("Cookies:", cookie);
+      console.log("Cookies:", cookie); 
     }
   }, []);
 
@@ -25,7 +25,7 @@ const Login = () => {
       const response = await axios.post(
         "https://dreamify-backend.vercel.app/users/login", 
         { email, password },
-        { withCredentials: true }
+        { withCredentials: true } 
       );
 
       if (response.status === 200) {
