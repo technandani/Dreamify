@@ -21,10 +21,14 @@ const Login = () => {
         { withCredentials: true } 
       );
 
+      useEffect(() => {
+        console.log(document.cookie);  
+      }, []);
+
       if (response.status === 200) {
         setEmail("");
         setPassword("");
-        navigate("/create"); 
+        // navigate("/create"); 
         window.location.reload();
       } else {
         setError("Login failed. Please try again.");
