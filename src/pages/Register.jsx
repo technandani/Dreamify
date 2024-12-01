@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";  
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { handleSuccess, handleError } from '../utils';
+import { handleSuccess, handleError } from "../utils";
 import { ToastContainer } from "react-toastify";
 
 const Wrapper = styled.div``;
@@ -12,7 +12,7 @@ const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [profilePic, setProfilePic] = useState(null); 
+  const [profilePic, setProfilePic] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -36,11 +36,15 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("https://dreamify-backend.vercel.app/users/register", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data", 
-        },
-      });
+      const response = await axios.post(
+        "https://dreamify-backend-nk.vercel.app/users/register",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
 
       const { success, message } = response.data;
 
@@ -68,7 +72,8 @@ const Register = () => {
             <div className="title">
               <h2>Welcome to Dreamify</h2>
               <p>
-                Sign up to Dreamify and turn your imagination into beautiful, unique images
+                Sign up to Dreamify and turn your imagination into beautiful,
+                unique images
               </p>
             </div>
             <div className="inputBox">
@@ -91,7 +96,7 @@ const Register = () => {
               <div className="authInput">
                 <div className="inputTitle">Password</div>
                 <input
-                  type="password" 
+                  type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
@@ -99,13 +104,14 @@ const Register = () => {
               <div className="authInput">
                 <div className="inputTitle">Profile picture</div>
                 <input
-                  type="file" 
-                  onChange={(e) => setProfilePic(e.target.files[0])} 
+                  type="file"
+                  onChange={(e) => setProfilePic(e.target.files[0])}
                 />
-                {/* {profilePic && <img src={URL.createObjectURL(profilePic)} alt="Profile Preview" />} */}
               </div>
               <div className="authInput">
-                <button className="submit" type="submit">SignUp</button>
+                <button className="submit" type="submit">
+                  SignUp
+                </button>
               </div>
             </div>
             <div className="forgotBox">

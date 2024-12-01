@@ -79,7 +79,7 @@ const Create = () => {
 
     try {
       const response = await axios.get(
-        `https://dreamify-backend.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}`
+        `https://dreamify-backend-nk.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}`
       );
 
       const imageUrl = response.data.imageUrl;
@@ -108,7 +108,7 @@ const Create = () => {
         }
   
         const response = await axios.post(
-          "https://dreamify-backend.vercel.app/posts/create-post",
+          "https://dreamify-backend-nk.vercel.app/posts/create-post",
           {
             url: generatedImage,
             prompt: prompt,

@@ -26,7 +26,7 @@ const Login = () => {
     try {
       // Send login request to backend
       const response = await axios.post(
-        "https://dreamify-backend.vercel.app/users/login", 
+        "https://dreamify-backend-nk.vercel.app/users/login", 
         { email, password },
         { withCredentials: true } 
       );
@@ -36,8 +36,8 @@ const Login = () => {
       if (success) {
         localStorage.setItem("uid", token);
         localStorage.setItem("loggedInUser", name);
-        Cookies.set("uid", token, { expires: 1 });
-        Cookies.set("loggedInUser", name, { expires: 1 });
+        Cookies.set("uid", token, { expires: 5 });
+        Cookies.set("loggedInUser", name, { expires: 5 });
 
         handleSuccess('Login successful!');
         setEmail("");
