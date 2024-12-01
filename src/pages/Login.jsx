@@ -1,43 +1,57 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import axios from "axios";
+import Cookies from "js-cookie"; 
+import { ToastContainer } from "react-toastify";
+import { handleError, handleSuccess } from '../utils';
 
 const Wrapper = styled.div``;
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const cookie = document.cookie;
-    if (cookie) {
-      console.log("Cookies:", cookie); 
-    }
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password) {
+      return handleError("Email and password are required.");
+    }
+
+    setLoading(true);
     try {
+      // Send login request to backend
       const response = await axios.post(
         "https://dreamify-backend.vercel.app/users/login", 
         { email, password },
         { withCredentials: true } 
       );
 
-      if (response.status === 200) {
+      const { success, token, name, message } = response.data;
+
+      if (success) {
+        localStorage.setItem("uid", token);
+        localStorage.setItem("loggedInUser", name);
+        Cookies.set("uid", token, { expires: 1 });
+        Cookies.set("loggedInUser", name, { expires: 1 });
+
+        handleSuccess('Login successful!');
         setEmail("");
         setPassword("");
+        navigate("/create");
         window.location.reload();
       } else {
-        setError("Login failed. Please try again.");
+        return handleError('Login failed. Please try again.');
       }
-    } catch (error) {
-      setError("Invalid email or password.");
-      console.error("Login error", error);
+    } catch (err) {
+      console.log("error: ", err);
+      handleError('Something went wrong. Please try again later.');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -50,8 +64,7 @@ const Login = () => {
             <div className="title">
               <h2>Welcome to Dreamify</h2>
               <p>
-                Sign in to Dreamify and turn your imagination into beautiful,
-                unique images
+                Sign in to Dreamify and turn your imagination into beautiful, unique images
               </p>
             </div>
             <div className="inputBox">
@@ -72,12 +85,9 @@ const Login = () => {
                 />
               </div>
               <div className="authInput">
-                <button className="submit" type="submit">
-                  SignIn
-                </button>
+                {loading ? <p>Loading...</p> : <button className="submit" type="submit">SignIn</button>}
               </div>
             </div>
-            {error && <p>{error}</p>}
             <div className="forgotBox">
               <p>
                 New to Dreamify?{" "}
@@ -87,6 +97,7 @@ const Login = () => {
               </p>
             </div>
           </form>
+          <ToastContainer theme="dark" />
         </div>
       </Wrapper>
     </>

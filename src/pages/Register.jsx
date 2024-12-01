@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Navbar from "./Navbar";
 import axios from "axios";
+import { handleSuccess, handleError } from '../utils';
+import { ToastContainer } from "react-toastify";
 
 const Wrapper = styled.div``;
 
@@ -12,10 +14,17 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [profilePic, setProfilePic] = useState(null); 
   const navigate = useNavigate();
-  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!email || !password || !name) {
+      return handleError("All fields are required.");
+    }
+
+    if (!/\S+@\S+\.\S+/.test(email)) {
+      return handleError("Please enter a valid email.");
+    }
 
     const formData = new FormData();
     formData.append("name", name);
@@ -33,15 +42,20 @@ const Register = () => {
         },
       });
 
-      console.log("User registered successfully:", response.data);
-      setName("");
-      setEmail("");
-      setPassword("");
-      setProfilePic(null);
-      navigate("/login");
+      const { success, message } = response.data;
+
+      if (success) {
+        handleSuccess(message);
+        setName("");
+        setEmail("");
+        setPassword("");
+        setProfilePic(null);
+        setTimeout(() => {
+          navigate("/login");
+        }, 1000);
+      }
     } catch (err) {
-      console.error("Error registering user:", err);
-      setError(err.response ? err.response.data.message : "Network Error");
+      return handleError(err);
     }
   };
 
@@ -88,6 +102,7 @@ const Register = () => {
                   type="file" 
                   onChange={(e) => setProfilePic(e.target.files[0])} 
                 />
+                {/* {profilePic && <img src={URL.createObjectURL(profilePic)} alt="Profile Preview" />} */}
               </div>
               <div className="authInput">
                 <button className="submit" type="submit">SignUp</button>
@@ -108,6 +123,7 @@ const Register = () => {
               </button>
             </div>
           </form>
+          <ToastContainer theme="dark" />
         </div>
       </Wrapper>
     </>

@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
-
+import Cookies from 'js-cookie';
 const AuthContext = createContext();
 
 const getCookie = (name) => {
@@ -14,9 +14,8 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     const token = localStorage.getItem("uid");
-  
     const cookieToken = getCookie("uid");
-  
+
     if (token || cookieToken) {
       setIsLoggedIn(true);
     } else {
@@ -29,8 +28,11 @@ export const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
+    localStorage.removeItem("loggedInUser");
     localStorage.removeItem("uid");
-    document.cookie = "uid=; Max-Age=0; path=/"; 
+    // document.cookie = "uid=; Max-Age=0; path=/";
+    Cookies.remove("uid"); 
+    Cookies.remove("loggedInUser");
     setIsLoggedIn(false);
   };
 
