@@ -22,6 +22,8 @@ const Login = () => {
         { withCredentials: true } 
       );
 
+      console.log('Cookies:', document.cookie);
+
       useEffect(() => {
         console.log(document.cookie);  
       }, []);
