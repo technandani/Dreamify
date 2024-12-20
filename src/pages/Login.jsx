@@ -24,7 +24,6 @@ const Login = () => {
 
     setLoading(true);
     try {
-      // Send login request to backend
       const response = await axios.post(
         "https://dreamify-backend-nk.vercel.app/users/login", 
         { email, password },

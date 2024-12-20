@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Navbar from "./Navbar";
 import axios from "axios";
-import { handleSuccess, handleError } from "../utils";
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
+import styled from "styled-components";
 
 const Wrapper = styled.div``;
 
@@ -18,22 +17,27 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !password || !name) {
-      return handleError("All fields are required.");
+    // Client-side validation
+    if (!name || !email || !password) {
+      toast.error("All fields are required.");
+      return;
     }
 
     if (!/\S+@\S+\.\S+/.test(email)) {
-      return handleError("Please enter a valid email.");
+      toast.error("Please enter a valid email.");
+      return;
+    }
+
+    if (password.length < 8) {
+      toast.error("Password must be at least 8 characters long.");
+      return;
     }
 
     const formData = new FormData();
     formData.append("name", name);
     formData.append("email", email);
     formData.append("password", password);
-
-    if (profilePic) {
-      formData.append("profilePic", profilePic);
-    }
+    if (profilePic) formData.append("profilePic", profilePic);
 
     try {
       const response = await axios.post(
@@ -46,20 +50,21 @@ const Register = () => {
         }
       );
 
-      const { success, message } = response.data;
-
-      if (success) {
-        handleSuccess(message);
-        setName("");
-        setEmail("");
-        setPassword("");
-        setProfilePic(null);
-        setTimeout(() => {
-          navigate("/login");
-        }, 1000);
+      // Success handling
+      toast.success(response.data.message);
+      setName("");
+      setEmail("");
+      setPassword("");
+      setProfilePic(null);
+      navigate("/login");
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        toast.error(error.response.data.message); 
+      } else if (error.response && error.response.status === 500) {
+        toast.error("Server error. Please try again later.");
+      } else {
+        toast.error("An unexpected error occurred. Please try again.");
       }
-    } catch (err) {
-      return handleError(err);
     }
   };
 
@@ -81,6 +86,7 @@ const Register = () => {
                 <div className="inputTitle">Name</div>
                 <input
                   type="text"
+                  placeholder="Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -88,7 +94,8 @@ const Register = () => {
               <div className="authInput">
                 <div className="inputTitle">Email</div>
                 <input
-                  type="text"
+                  type="email"
+                  placeholder="Email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -97,12 +104,13 @@ const Register = () => {
                 <div className="inputTitle">Password</div>
                 <input
                   type="password"
+                  placeholder="Password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </div>
               <div className="authInput">
-                <div className="inputTitle">Profile picture</div>
+                <div className="inputTitle">Profile Picture</div>
                 <input
                   type="file"
                   onChange={(e) => setProfilePic(e.target.files[0])}
@@ -110,26 +118,26 @@ const Register = () => {
               </div>
               <div className="authInput">
                 <button className="submit" type="submit">
-                  SignUp
+                  Register
+                </button>
+              </div>
+              <div className="forgotBox">
+                <p>
+                  Already have an account?{" "}
+                  <a href="/login">
+                    <span>SignIn</span>
+                  </a>
+                </p>
+                <button className="googleBox">
+                  <div className="googleicon">
+                    <img src="images/google.png" alt="google icon" />
+                  </div>
+                  <div className="google">SignIn with Google</div>
                 </button>
               </div>
             </div>
-            <div className="forgotBox">
-              <p>
-                Already have an account?{" "}
-                <a href="/login">
-                  <span>SignIn</span>
-                </a>
-              </p>
-              <button className="googleBox">
-                <div className="googleicon">
-                  <img src="images/google.png" alt="google icon" />
-                </div>
-                <div className="google">SignIn with Google</div>
-              </button>
-            </div>
           </form>
-          <ToastContainer theme="dark" />
+          <ToastContainer />
         </div>
       </Wrapper>
     </>
