@@ -79,7 +79,7 @@ const Create = () => {
 
     try {
       const response = await axios.get(
-        `https://dreamify-backend-nk.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}`
+        `https://dreamify-backend.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}`
       );
 
       const imageUrl = response.data.imageUrl;
