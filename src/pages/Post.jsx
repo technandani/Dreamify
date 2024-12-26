@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ImageCard from "./ImageCard";
 import Navbar from "./Navbar";
 import axios from "axios";
+import Loader from "../components/Loader";
 
 const Container = styled.div``;
 
@@ -36,6 +37,12 @@ const CardWrapper = styled.div`
   }
 `;
 
+const DivLoader = styled.div`
+  @media (max-width: 639px) {
+    padding-top: 25%;
+  }
+`;
+
 const Post = () => {
   const [posts, setPosts] = useState([]);
   const [filterPosts, setFilterPosts] = useState([]);
@@ -45,11 +52,14 @@ const Post = () => {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/posts/allPosts");
-      setPosts(res.data);
-      setFilterPosts(res.data); 
+      const res = await axios.get("https://dreamify-backend.vercel.app/posts/allPosts"); 
+      const data = Array.isArray(res.data) ? res.data : []; 
+      setPosts(data);
+      setFilterPosts(data);
     } catch (err) {
       console.error("Error fetching posts:", err);
+      setPosts([]);
+      setFilterPosts([]);
     }
     setLoading(false);
   };
@@ -57,22 +67,21 @@ const Post = () => {
   useEffect(() => {
     fetchImages();
   }, []);
-  
+
   useEffect(() => {
     if (!search) {
       setFilterPosts(posts); 
       return;
     }
-  
+
     const filtered = posts.filter((post) => {
       const promptMatch = post?.prompt?.toLowerCase().includes(search.toLowerCase());
       const authorMatch = post?.user?.name?.toLowerCase().includes(search.toLowerCase());
       return promptMatch || authorMatch;
     });
-  
+
     setFilterPosts(filtered);
-  }, [posts, search]); 
-  
+  }, [posts, search]);
 
   return (
     <>
@@ -100,11 +109,17 @@ const Post = () => {
         <Wrapper>
           <CardWrapper>
             {loading ? (
-              <p>Loading...</p>
-            ) : filterPosts.length === 0 ? (
-              <p>No posts found</p>
-            ) : (
+              <DivLoader className="divLoader" style={{width: '98vw'}}>
+                <Loader/>
+              </DivLoader>
+            ) : Array.isArray(filterPosts) && filterPosts.length > 0 ? (
               filterPosts.map((post, index) => <ImageCard key={index} post={post} />)
+            ) : (
+              <div className="notFoundCon" style={{width: '98vw'}}>
+                <div className="notFoundImage" style={{width:'40vw', height:'auto', margin:'auto'}}>
+                  <img src="images/notFound.png" style={{width:'100%', height:'100%'}} alt="" />
+                </div>
+              </div>
             )}
           </CardWrapper>
         </Wrapper>

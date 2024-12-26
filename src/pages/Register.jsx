@@ -41,7 +41,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://dreamify-backend-nk.vercel.app/users/register",
+        "https://dreamify-backend.vercel.app/users/register",
         formData,
         {
           headers: {
