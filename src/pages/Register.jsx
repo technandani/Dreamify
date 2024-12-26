@@ -137,7 +137,7 @@ const Register = () => {
               </div>
             </div>
           </form>
-          <ToastContainer />
+          <ToastContainer  theme="dark" />
         </div>
       </Wrapper>
     </>
