@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
+import { handleError, handleSuccess } from '../utils';
 import styled from "styled-components";
 
 const Wrapper = styled.div``;
@@ -41,7 +42,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://dreamify-backend.vercel.app/users/register",
+        "http://localhost:5000/users/register",
         formData,
         {
           headers: {
@@ -57,15 +58,13 @@ const Register = () => {
       setPassword("");
       setProfilePic(null);
       navigate("/login");
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        toast.error(error.response.data.message); 
-      } else if (error.response && error.response.status === 500) {
-        toast.error("Server error. Please try again later.");
-      } else {
-        toast.error("An unexpected error occurred. Please try again.");
-      }
-    }
+    } catch (err) {
+          const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
+          handleError(errorMessage); 
+          console.log("error: ", err); 
+        } finally {
+          setLoading(false);
+        }
   };
 
   return (
@@ -137,7 +136,7 @@ const Register = () => {
               </div>
             </div>
           </form>
-          <ToastContainer />
+          <ToastContainer theme="dark" />
         </div>
       </Wrapper>
     </>

@@ -17,11 +17,11 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!email || !password) {
       return handleError("Email and password are required.");
     }
-
+  
     setLoading(true);
     try {
       const response = await axios.post(
@@ -29,30 +29,32 @@ const Login = () => {
         { email, password },
         { withCredentials: true } 
       );
-
+  
       const { success, token, name, message } = response.data;
-
+  
       if (success) {
         localStorage.setItem("uid", token);
         localStorage.setItem("loggedInUser", name);
         Cookies.set("uid", token, { expires: 5 });
         Cookies.set("loggedInUser", name, { expires: 5 });
-
+  
         handleSuccess('Login successful!');
         setEmail("");
         setPassword("");
         navigate("/create");
         window.location.reload();
       } else {
-        return handleError('Login failed. Please try again.');
+        return handleError(message || 'Login failed. Please try again.');
       }
     } catch (err) {
-      console.log("error: ", err);
-      handleError('Something went wrong. Please try again later.');
+      const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
+      handleError(errorMessage); 
+      console.log("error: ", err); 
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <>
