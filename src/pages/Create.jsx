@@ -4,7 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import axios from "axios";
 import Navbar from "./Navbar";
 import FileSaver from "file-saver";
-import Modal from "../components/Loader";
+import Modal from "../components/Modal";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
