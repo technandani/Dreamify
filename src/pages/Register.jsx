@@ -32,7 +32,7 @@ const Register = () => {
   const loginWithGoogle = async (accessToken) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/loginWithGoogle", 
+        "https://dreamify-backend.vercel.app/users/loginWithGoogle", 
         { token: accessToken }, // Send the access token directly to the backend
         {
           headers: {
