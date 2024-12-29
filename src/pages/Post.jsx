@@ -8,7 +8,6 @@ import HeroSection from "../components/HeroSection";
 import { useSearch } from "../context/SearchContext"; // Use the custom hook for search
 
 const Container = styled.div``;
-
 const Wrapper = styled.div`
   width: 100%;
   max-width: 1400px;
@@ -28,14 +27,12 @@ const CardWrapper = styled.div`
     grid-template-columns: repeat(4, 1fr);
   }
 
-  @media (min-width: 640px) and (max-width: 1199px) {
+  @media (min-width: 640) and (max-width: 1199px) {
     grid-template-columns: repeat(3, 1fr);
   }
 
   @media (max-width: 639px) {
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 10px;
   }
 `;
 
@@ -56,7 +53,7 @@ const Post = () => {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/posts/allPosts");
+      const res = await axios.get(`${import.meta.env.VITE_BASE_URL}/posts/allPosts`);
       const data = Array.isArray(res.data) ? res.data : [];
       setPosts(data);
       setFilterPosts(data);

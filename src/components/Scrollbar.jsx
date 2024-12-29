@@ -3,36 +3,34 @@ import "./HeroSection.css";
 import { useSearch } from "../context/SearchContext"; // Use the custom hook for setting search
 
 const data = [
-  { img: "images/1.jpg", text: "Nature" },
-  { img: "images/2.jpg", text: "Technology" },
-  { img: "images/3.jpg", text: "Galaxy" },
-  { img: "images/4.jpg", text: "planet" },
-  { img: "images/5.jpg", text: "Supernova" },
-  { img: "images/6.jpg", text: "girl" },
-  { img: "images/8.jpg", text: "Milky Way" },
-  { img: "images/10.jpg", text: "snow" },
-  { img: "images/9.jpg", text: "Deep Space" },
-  { img: "images/1.jpg", text: "peacock " },
-  { img: "images/7.jpg", text: "boy" },
-  { img: "images/2.jpg", text: "spaceship" },
-  { img: "images/3.jpg", text: "alien" },
-  { img: "images/4.jpg", text: "colors" },
-  { img: "images/5.jpg", text: "garden" },
-  { img: "images/6.jpg", text: "painting" },
-  { img: "images/7.jpg", text: "Fantasy" },
-  { img: "images/8.jpg", text: "Travel" },
-  { img: "images/9.jpg", text: "Laptop" },
-  { img: "images/10.jpg", text: "Black Hole" },
-  { img: "images/1.jpg", text: "Night" },
-  { img: "images/2.jpg", text: "Ocean " },
-  { img: "images/3.jpg", text: "Galaxy" },
-  { img: "images/4.jpg", text: "Star Cluster" },
-  { img: "images/5.jpg", text: "Fish" },
-  { img: "images/6.jpg", text: "Flower" },
-  { img: "images/7.jpg", text: "Village " },
-  { img: "images/8.jpg", text: "Farmer" },
-  { img: "images/9.jpg", text: "Rain" },
-  { img: "images/10.jpg", text: "Black Hole" },
+  { img: "images/nature.jpg", text: "Nature" },
+  { img: "images/forest.jpg", text: "Forest" },
+  { img: "images/technology.jpg", text: "Technology" },
+  { img: "images/glaxey.jpg", text: "Galaxy" },
+  { img: "images/planet.jpg", text: "planet" },
+  { img: "images/girl.jpeg", text: "girl" },
+  { img: "images/snow.jpg", text: "snow" },
+  { img: "images/deepSpace.jpg", text: "Deep Space" },
+  { img: "images/peacock.jpg", text: "peacock " },
+  { img: "images/moon.jpg", text: "Moon" },
+  { img: "images/boy.jpg", text: "boy" },
+  { img: "images/alien.jpg", text: "alien" },
+  { img: "images/4.jpg", text: "spaceship" },
+  { img: "images/garden.jpg", text: "garden" },
+  { img: "images/painting.jpg", text: "painting" },
+  { img: "images/fairy.png", text: "Fairy" },
+  { img: "images/horror.jpg", text: "Horror" },
+  { img: "images/fantasy.jpg", text: "Fantasy" },
+  { img: "images/travel.jpeg", text: "Travel" },
+  { img: "images/laptop.jpg", text: "Laptop" },
+  { img: "images/night.jpg", text: "Night" },
+  { img: "images/ocean.jpg", text: "Ocean " },
+  { img: "images/fish.jpg", text: "Fish" },
+  { img: "images/flower.jpg", text: "Flower" },
+  { img: "images/village.jpg", text: "Village" },
+  { img: "images/farmer.jpg", text: "Farmer" },
+  { img: "images/rain.jpg", text: "Rain" },
+  { img: "images/blackHole.jpg", text: "Black Hole" },
 ];
 
 const Scrollbar = () => {
@@ -126,6 +124,7 @@ const Scrollbar = () => {
           onMouseOver={(e) => {
             e.target.style.transform = "scale(1.05)";
             e.target.style.boxShadow = "0 0 5px rgba(255, 255, 255, 0.2)";
+            
           }}
         >
           {item.text}

@@ -20,8 +20,6 @@ const Login = () => {
   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log("Google token received:", tokenResponse);
-      localStorage.setItem("uid", tokenResponse.access_token);
-      Cookies.set("uid", tokenResponse.access_token, { expires: 5 });
   
       // Send token to backend
       loginWithGoogle(tokenResponse.access_token);
@@ -36,8 +34,8 @@ const Login = () => {
   const loginWithGoogle = async (accessToken) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/loginWithGoogle", 
-        { token: accessToken }, // Send the access token directly to the backend
+        `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`, 
+        { rowtoken: accessToken }, 
         {
           headers: {
             "Content-Type": "application/json", 
@@ -45,6 +43,24 @@ const Login = () => {
           withCredentials: true,
         }
       );
+
+      const { success, token, name, message } = response.data;
+
+      if (success) {
+        localStorage.setItem("uid", token);
+        localStorage.setItem("loggedInUser", name);
+        Cookies.set("uid", token, { expires: 5 });
+        Cookies.set("loggedInUser", name, { expires: 5 });
+
+        handleSuccess("Login successful!");
+        setEmail("");
+        setPassword("");
+        navigate("/create");
+        window.location.reload();
+      } else {
+        return handleError(message || "Login failed. Please try again.");
+      }
+
       navigate("/create"); // Redirect to the image generation page
       window.location.reload();
     } catch (err) {
@@ -66,7 +82,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/login",
+        `${import.meta.env.VITE_BASE_URL}/users/login`,
         { email, password },
         { withCredentials: true }
       );

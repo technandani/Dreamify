@@ -11,16 +11,16 @@ transform-origin: center;
 backround-color: red;
 }
 .loader-icon1{
-border-bottom: 3px solid green;
+border-bottom: 3px solid #fff;
 rotate: 4deg;
 }
 .loader-icon2{
-border-bottom: 3px solid green;
+border-bottom: 3px solid #fff;
 rotate: 129deg;
 }
 
 .loader-icon3{
-border-bottom: 3px solid green;
+border-bottom: 3px solid #fff;
 rotate: 272deg;
 }
 

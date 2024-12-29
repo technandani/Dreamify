@@ -4,10 +4,19 @@ import { LazyLoadImage } from "react-lazy-load-image-component";
 import FileSaver from "file-saver";
 
 const Card = styled.div`
-  position: relative;
+   position: relative;
   display: flex;
+  cursor: pointer;
   transition: all 0.3s ease;
   border-radius: 15px;
+  &:hover {
+    /* scale: 1.05; */
+  }
+
+  &:nth-child(7n + 1) {
+    grid-column: auto/span 2;
+    grid-row: auto/span 2;
+  }
 `;
 
 const HoverOverlay = styled.div`

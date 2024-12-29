@@ -1,5 +1,5 @@
 // src/Create.js
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext"; 
 import axios from "axios";
 import Navbar from "./Navbar";
@@ -79,7 +79,7 @@ const Create = () => {
 
     try {
       const response = await axios.get(
-        `http://localhost:5000/image/generate-image?prompt=${encodeURIComponent(prompt)}`
+        `${import.meta.env.VITE_BASE_URL}/image/generate-image?prompt=${encodeURIComponent(prompt)}`
       );
 
       const imageUrl = response.data.imageUrl;
@@ -108,7 +108,7 @@ const Create = () => {
         }
   
         const response = await axios.post(
-          "http://localhost:5000/posts/create-post",
+          `${import.meta.env.VITE_BASE_URL}/posts/create-post`,
           {
             url: generatedImage,
             prompt: prompt,

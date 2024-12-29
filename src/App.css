@@ -62,16 +62,17 @@ header {
 }
 
 .btn {
-  border-radius: 20px;
+  border-radius: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   background-color: #1b2a41;
   color: #fff;
+  padding: 8px 20px;
   cursor: pointer;
-  height: 45px;
-  width: 200px;
+  /* height: 45px;
+  width: 200px; */
   font-size: 18px;
 }
 
@@ -80,12 +81,11 @@ header {
 }
 
 #genBtn{
-  background: rgb(255,153,0);
-background: linear-gradient(90deg, rgba(255,153,0,1) 54%, rgba(255,166,0,1) 80%, rgba(255,166,0,1) 100%);
+background: linear-gradient(90deg, rgb(224, 134, 0) 54%, rgb(236, 154, 1) 80%, rgb(180, 122, 15) 100%);
 }
 
 #genBtn:hover{
-  background-color: #253b50;
+  background: linear-gradient(90deg, rgb(254, 167, 37) 54%, rgb(248, 166, 12) 80%, rgba(255,166,0,1) 100%);
 }
 
 .responsiveMenu {
@@ -152,7 +152,7 @@ background: linear-gradient(90deg, rgba(255,153,0,1) 54%, rgba(255,166,0,1) 80%,
 }
 
 .searchContainer {
-  margin: 100px;
+  margin: 30px;
   display: flex;
   flex-direction: column;
   gap: 20px;
