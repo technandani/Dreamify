@@ -3,22 +3,58 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-import { handleError, handleSuccess } from '../utils';
-import styled from "styled-components";
-
-const Wrapper = styled.div``;
+import { useGoogleLogin } from "@react-oauth/google";
+import Cookies from "js-cookie";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [profilePic, setProfilePic] = useState(null);
+    const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+  // Google Login Handler
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => {
+      console.log("Google token received:", tokenResponse);
+      localStorage.setItem("uid", tokenResponse.access_token);
+      Cookies.set("uid", tokenResponse.access_token, { expires: 5 });
+      loginWithGoogle(tokenResponse.access_token); // Ensure this is being called with the correct token
+    },
+    onError: (error) => {
+      console.error("Google login failed:", error);
+      toast.error("Google login failed. Please try again.");
+    },
+  });
+  
+
+  const loginWithGoogle = async (accessToken) => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/users/loginWithGoogle", 
+        { token: accessToken }, // Send the access token directly to the backend
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, 
+        }
+      );
+      navigate("/create"); // Redirect to the image generation page
+      window.location.reload(); 
+    } catch (err) {
+      const errorMessage =
+        err.response?.data?.message || "Something went wrong. Please try again later.";
+      toast.error(errorMessage);
+    }
+  };
+  
+
+  // Normal form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Client-side validation
     if (!name || !email || !password) {
       toast.error("All fields are required.");
       return;
@@ -50,8 +86,6 @@ const Register = () => {
           },
         }
       );
-
-      // Success handling
       toast.success(response.data.message);
       setName("");
       setEmail("");
@@ -59,86 +93,74 @@ const Register = () => {
       setProfilePic(null);
       navigate("/login");
     } catch (err) {
-          const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
-          handleError(errorMessage); 
-          console.log("error: ", err); 
-        } finally {
-          setLoading(false);
-        }
+      const errorMessage = err.response?.data?.message || "Something went wrong. Please try again later.";
+      toast.error(errorMessage);
+    }
   };
 
   return (
     <>
       <Navbar />
-      <Wrapper>
-        <div className="loginContainer">
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <div className="title">
-              <h2>Welcome to Dreamify</h2>
+      <div className="loginContainer">
+        <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <div className="title">
+            <h2>Welcome to Dreamify</h2>
+            <p>Sign up to Dreamify and turn your imagination into beautiful, unique images</p>
+          </div>
+          <div className="inputBox">
+            <div className="authInput">
+              <input
+                type="text"
+                placeholder="Enter name..."
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
+            <div className="authInput">
+              <input
+                type="email"
+                placeholder="Enter email..."
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="authInput">
+              <input
+                type="password"
+                placeholder="Enter password..."
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+            <div className="authInput">
+              <input
+                type="file"
+                onChange={(e) => setProfilePic(e.target.files[0])}
+              />
+            </div>
+            <div className="authInput">
+              {loading ? (
+                  <p>Loading...</p>
+                ) : (
+                  <button className="submit" type="submit">Sign Up</button>
+                )}
+            </div>
+            <div className="forgotBox">
               <p>
-                Sign up to Dreamify and turn your imagination into beautiful,
-                unique images
+                Already have an account?{" "}
+                <a href="/login"><span>SignIn</span></a>
               </p>
-            </div>
-            <div className="inputBox">
-              <div className="authInput">
-                <div className="inputTitle">Name</div>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-              </div>
-              <div className="authInput">
-                <div className="inputTitle">Email</div>
-                <input
-                  type="email"
-                  placeholder="Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <div className="authInput">
-                <div className="inputTitle">Password</div>
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <div className="authInput">
-                <div className="inputTitle">Profile Picture</div>
-                <input
-                  type="file"
-                  onChange={(e) => setProfilePic(e.target.files[0])}
-                />
-              </div>
-              <div className="authInput">
-                <button className="submit" type="submit">
-                  Register
-                </button>
-              </div>
-              <div className="forgotBox">
-                <p>
-                  Already have an account?{" "}
-                  <a href="/login">
-                    <span>SignIn</span>
-                  </a>
-                </p>
-                <button className="googleBox">
-                  <div className="googleicon">
-                    <img src="images/google.png" alt="google icon" />
-                  </div>
-                  <div className="google">SignIn with Google</div>
-                </button>
+              <div className="googleBox" onClick={() => login()}>
+                <div className="googleicon">
+                  <img src="images/google.png" alt="google icon" />
+                </div>
+                <div className="google">SignIn with Google</div>
               </div>
             </div>
-          </form>
-          <ToastContainer theme="dark" />
-        </div>
-      </Wrapper>
+          </div>
+        </form>
+        <ToastContainer theme="dark" />
+      </div>
     </>
   );
 };

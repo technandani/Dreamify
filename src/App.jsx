@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider, useAuth } from "./context/AuthContext"; 
+import { SearchProvider } from "./context/SearchContext"; 
 import "./App.css";
 import Post from "./pages/Post";
 import Create from "./pages/Create";
@@ -16,6 +17,7 @@ const ProtectedRoute = ({ element, ...rest }) => {
 const App = () => {
   return (
     <AuthProvider>
+      <SearchProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Post />} />
@@ -24,6 +26,7 @@ const App = () => {
           <Route path="/register" element={<ProtectedRoute element={<Register />} />} />
         </Routes>
       </Router>
+      </SearchProvider>
     </AuthProvider>
   );
 };

@@ -31,8 +31,10 @@ const Navbar = () => {
             <img src="images/cut.png" alt="close menu" height={"30px"} />
           </a>
           <button className="btn" id="genBtn">
-            <a href="/create">
-              <i className="fa-solid fa-plus" style={{ color: "#fff" }}></i>{" "}
+            <a href="/create" style={{display:'flex', alignItems:'center', justifyContent:'center', gap:'10px'}}>
+              {/* <i className="fa-solid fa-palette" style={{ color: "#fff" }}></i>{" "} */}
+              {/* <i class="fa-solid fa-palette"></i> */}
+              <img src="images/paint5.png" style={{height:'30px', width:'auto', rotate:'315deg'}} alt="" />
               Generate image
             </a>
           </button>

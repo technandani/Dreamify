@@ -1,0 +1,100 @@
+.hero-section {
+    position: relative;
+    height: 70vh;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transform: scale(1.1);
+    transition: opacity 1.5s ease, transform 2s ease;
+  }
+  
+  .hero-image.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .hero-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 10;
+  }
+  
+  .hero-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    animation: fadeInDown 2s ease;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.2rem; /* Reduced length */
+    margin-bottom: 30px;
+    animation: fadeInUp 2s ease;
+  }
+  
+  .hero-button {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: fadeIn 2.5s ease;
+    transition: background-color 0.3s;
+  }
+  
+  .hero-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  /* Keyframes for animations */
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .scroll-container::-webkit-scrollbar {
+    display: none;
+  }
+  

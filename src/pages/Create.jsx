@@ -79,7 +79,7 @@ const Create = () => {
 
     try {
       const response = await axios.get(
-        `https://dreamify-backend.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}`
+        `http://localhost:5000/image/generate-image?prompt=${encodeURIComponent(prompt)}`
       );
 
       const imageUrl = response.data.imageUrl;
@@ -108,7 +108,7 @@ const Create = () => {
         }
   
         const response = await axios.post(
-          "https://dreamify-backend.vercel.app/posts/create-post",
+          "http://localhost:5000/posts/create-post",
           {
             url: generatedImage,
             prompt: prompt,
@@ -170,7 +170,7 @@ const Create = () => {
                     disabled={generating}
                   >
                     <img
-                      src="images/stars.png"
+                      src="images/390.png"
                       alt=""
                       style={{ height: "40px" }}
                     />
@@ -182,9 +182,9 @@ const Create = () => {
                     onClick={handlePostImage}
                   >
                     <img
-                      src="images/pen.png"
+                      src="images/stars.png"
                       alt=""
-                      style={{ height: "40px", rotate: "45deg" }}
+                      style={{ height: "40px"}}
                     />
                     Post Image
                   </button>

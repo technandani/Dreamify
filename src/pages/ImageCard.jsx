@@ -22,11 +22,12 @@ const HoverOverlay = styled.div`
   justify-content: end;
   align-items: start;
   padding: 5%;
-  border-radius: inherit;
+  border-radius: 15px;
   gap: 5px;
   backdrop-filter: blur(8px);
   background-color: #253b5070;
   transition: opacity 0.3s ease-in;
+  overflow: hidden;
 
   ${Card}:hover & {
     opacity: 1;
@@ -35,6 +36,9 @@ const HoverOverlay = styled.div`
 
 const Prompt = styled.div`
   font-size: 15px;
+  @media (max-width: 699px) {
+    font-size: 12px;
+  }
 `;
 
 const BottomWrapper = styled.div`
@@ -75,7 +79,7 @@ const ImageCard = ({ post }) => {
       <LazyLoadImage
         src={post.url?.startsWith("http://") ? post.url.replace("http://", "https://") : post.url}
         alt="Generated image"
-        width={"100%"}
+        width={"100%"} style={{borderRadius:"15px"}}
       />
       <HoverOverlay>
         <Prompt>{post.prompt}</Prompt>
