@@ -1,6 +1,6 @@
 .hero-section {
     position: relative;
-    height: 70vh;
+    height: 70vmin;
     width: 100%;
     overflow: hidden;
   }
@@ -31,20 +31,6 @@
     text-align: center;
     color: white;
     z-index: 10;
-  }
-  
-  .hero-title {
-    font-size: 3rem;
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-shadow: 2px 2px 5px #555;
-    animation: fadeInDown 2s ease;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.2rem; /* Reduced length */
-    margin-bottom: 30px;
-    animation: fadeInUp 2s ease;
   }
   
   .hero-button {
@@ -99,3 +85,12 @@
     display: none;
   }
   
+
+
+  @media (max-width: 700px) {
+
+    .hero-overlay {
+      min-width:90vw;
+    }
+    
+  }

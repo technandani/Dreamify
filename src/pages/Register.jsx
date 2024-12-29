@@ -14,13 +14,13 @@ const Register = () => {
     const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  // Google Login Handler
-  const login = useGoogleLogin({
+   // Google Login Handler
+   const login = useGoogleLogin({
     onSuccess: (tokenResponse) => {
       console.log("Google token received:", tokenResponse);
-      localStorage.setItem("uid", tokenResponse.access_token);
-      Cookies.set("uid", tokenResponse.access_token, { expires: 5 });
-      loginWithGoogle(tokenResponse.access_token); 
+  
+      // Send token to backend
+      loginWithGoogle(tokenResponse.access_token);
     },
     onError: (error) => {
       console.error("Google login failed:", error);
@@ -36,13 +36,24 @@ const Register = () => {
         { rowtoken: accessToken }, 
         {
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json", 
           },
-          withCredentials: true, 
+          withCredentials: true,
         }
       );
-      navigate("/create"); // Redirect to the image generation page
-      window.location.reload(); 
+
+      const { success, token, name, message } = response.data;
+
+      if (success) {
+        localStorage.setItem("uid", token);
+        localStorage.setItem("loggedInUser", name);
+        Cookies.set("uid", token, { expires: 5 });
+        Cookies.set("loggedInUser", name, { expires: 5 });
+        navigate("/create");
+        window.location.reload();
+      } else {
+        return handleError(message || "Login failed. Please try again.");
+      }
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "Something went wrong. Please try again later.";

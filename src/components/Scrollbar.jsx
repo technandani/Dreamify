@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import "./HeroSection.css";
+// import "./HeroSection.css";
 import { useSearch } from "../context/SearchContext"; // Use the custom hook for setting search
 
 const data = [
