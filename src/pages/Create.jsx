@@ -1,4 +1,3 @@
-// src/Create.js
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext"; 
 import axios from "axios";
@@ -79,7 +78,7 @@ const Create = () => {
 
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_BASE_URL}/image/generate-image?prompt=${encodeURIComponent(prompt)}`
+        "https://dreamify-backend.vercel.app/image/generate-image?prompt=${encodeURIComponent(prompt)}"
       );
 
       const imageUrl = response.data.imageUrl;
@@ -108,7 +107,7 @@ const Create = () => {
         }
   
         const response = await axios.post(
-          `${import.meta.env.VITE_BASE_URL}/posts/create-post`,
+          "https://dreamify-backend.vercel.app/posts/create-post",
           {
             url: generatedImage,
             prompt: prompt,
