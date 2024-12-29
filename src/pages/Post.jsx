@@ -56,7 +56,7 @@ const Post = () => {
   const fetchImages = async () => {
     setLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/posts/allPosts");
+      const res = await axios.get("https://dreamify-backend.vercel.app/posts/allPosts");
       const data = Array.isArray(res.data) ? res.data : [];
       setPosts(data);
       setFilterPosts(data);
