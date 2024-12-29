@@ -34,7 +34,7 @@ const Login = () => {
   const loginWithGoogle = async (accessToken) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`, 
+        "https://dreamify-backend.vercel.app/users/loginWithGoogle", 
         { rowtoken: accessToken }, 
         {
           headers: {
@@ -74,7 +74,7 @@ const Login = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/login`,
+        "https://dreamify-backend.vercel.app/users/login",
         { email, password },
         { withCredentials: true }
       );
