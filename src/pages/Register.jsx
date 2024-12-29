@@ -20,7 +20,7 @@ const Register = () => {
       console.log("Google token received:", tokenResponse);
       localStorage.setItem("uid", tokenResponse.access_token);
       Cookies.set("uid", tokenResponse.access_token, { expires: 5 });
-      loginWithGoogle(tokenResponse.access_token); // Ensure this is being called with the correct token
+      loginWithGoogle(tokenResponse.access_token); 
     },
     onError: (error) => {
       console.error("Google login failed:", error);
