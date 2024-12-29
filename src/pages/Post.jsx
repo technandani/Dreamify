@@ -57,7 +57,7 @@ const Post = () => {
     setLoading(true);
     try {
       const res = await axios.get("https://dreamify-backend.vercel.app/posts/allPosts");
-      const data = Array.isArray(res.data) ? res.data : [];
+      const data = Array.isArray(res.data);
       setPosts(data);
       setFilterPosts(data);
     } catch (err) {
