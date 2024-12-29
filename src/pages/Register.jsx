@@ -32,8 +32,8 @@ const Register = () => {
   const loginWithGoogle = async (accessToken) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`,
-        { rowtoken: accessToken }, // Send the access token directly to the backend
+        `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`, 
+        { rowtoken: accessToken }, 
         {
           headers: {
             "Content-Type": "application/json",

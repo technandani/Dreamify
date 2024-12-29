@@ -38,37 +38,68 @@ const Login = () => {
         { rowtoken: accessToken }, 
         {
           headers: {
-            "Content-Type": "application/json", 
+            "Content-Type": "application/json",
           },
-          withCredentials: true,
+          withCredentials: true, 
         }
       );
-
-      const { success, token, name, message } = response.data;
-
-      if (success) {
-        localStorage.setItem("uid", token);
-        localStorage.setItem("loggedInUser", name);
-        Cookies.set("uid", token, { expires: 5 });
-        Cookies.set("loggedInUser", name, { expires: 5 });
-
-        handleSuccess("Login successful!");
-        setEmail("");
-        setPassword("");
-        navigate("/create");
-        window.location.reload();
-      } else {
-        return handleError(message || "Login failed. Please try again.");
-      }
-
       navigate("/create"); // Redirect to the image generation page
-      window.location.reload();
+      window.location.reload(); 
     } catch (err) {
       const errorMessage =
         err.response?.data?.message || "Something went wrong. Please try again later.";
       toast.error(errorMessage);
     }
   };
+
+//   const loginWithGoogle = async (accessToken) => {
+//     try {
+
+      
+// //       const response = await axios.post(
+
+
+        
+// // // <<<<<<< HEAD
+// // //         `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`, 
+// // //         { rowtoken: accessToken }, 
+// // // =======
+// // //         "https://dreamify-backend.vercel.app/users/loginWithGoogle", 
+// // //         { token: accessToken }, // Send the access token directly to the backend
+// // // >>>>>>> adef6d152c611fb50b4394d60ee06f6494d4e4ba
+// // //         {
+// // //           headers: {
+// // //             "Content-Type": "application/json", 
+// // //           },
+// // //           withCredentials: true,
+// // //         }
+// //       );
+
+//       const { success, token, name, message } = response.data;
+
+//       if (success) {
+//         localStorage.setItem("uid", token);
+//         localStorage.setItem("loggedInUser", name);
+//         Cookies.set("uid", token, { expires: 5 });
+//         Cookies.set("loggedInUser", name, { expires: 5 });
+
+//         handleSuccess("Login successful!");
+//         setEmail("");
+//         setPassword("");
+//         navigate("/create");
+//         window.location.reload();
+//       } else {
+//         return handleError(message || "Login failed. Please try again.");
+//       }
+
+//       navigate("/create"); // Redirect to the image generation page
+//       window.location.reload();
+//     } catch (err) {
+//       const errorMessage =
+//         err.response?.data?.message || "Something went wrong. Please try again later.";
+//       toast.error(errorMessage);
+//     }
+//   };
   
 
   // normal login handle
