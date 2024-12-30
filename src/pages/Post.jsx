@@ -5,7 +5,7 @@ import Navbar from "./Navbar";
 import axios from "axios";
 import Loader from "../components/Loader";
 import HeroSection from "../components/HeroSection";
-import { useSearch } from "../context/SearchContext"; // Use the custom hook for search
+import { useSearch } from "../context/SearchContext";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
