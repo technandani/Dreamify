@@ -43,6 +43,16 @@ const DivLoader = styled.div`
   }
 `;
 
+const NotFound = styled.div`
+  width: 25vw;
+  margin: auto;
+  text-align: center;
+
+  @media (max-width: 639px) {
+    width: 85vw;
+  }
+`;
+
 const Post = () => {
   const [posts, setPosts] = useState([]);
   const [filterPosts, setFilterPosts] = useState([]);
@@ -125,16 +135,29 @@ const Post = () => {
               ))
             ) : (
               <div className="notFoundCon" style={{ width: "98vw" }}>
-                <div
-                  className="notFoundImage"
-                  style={{ width: "40vw", height: "auto", margin: "auto" }}
-                >
+                <NotFound className="notFoundImage" style={{}}>
                   <img
-                    src="images/notFound.png"
+                    src="https://res.cloudinary.com/dpmengi5q/image/upload/v1735578462/noData_2_ohoj6z.png"
                     style={{ width: "100%", height: "100%" }}
                     alt=""
                   />
-                </div>
+                  <h3>
+                    No results! Press 'Generate Image' to craft your image.
+                  </h3>
+                  <button
+                    className="loginBtn"
+                    style={{
+                      padding: "10px 20px",
+                      backgroundColor: "transparent",
+                      fontSize: "18px",
+                      boxShadow: "#fff 0 0 2px",
+                      borderRadius: "10px",
+                      margin: "20px",
+                    }}
+                  >
+                    <i className="fa-solid fa-paper-plane"></i> generate Image
+                  </button>
+                </NotFound>
               </div>
             )}
           </CardWrapper>
