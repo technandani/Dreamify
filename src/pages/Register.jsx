@@ -32,7 +32,7 @@ const Register = () => {
   const loginWithGoogle = async (accessToken) => {
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/users/loginWithGoogle`, 
+        `https://dreamify-backend.vercel.app/users/loginWithGoogle`, 
         { rowtoken: accessToken }, 
         {
           headers: {
@@ -89,7 +89,7 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/users/register",
+        "https://dreamify-backend.vercel.app/users/register",
         formData,
         {
           headers: {
