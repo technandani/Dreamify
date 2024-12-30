@@ -7,7 +7,7 @@ const content = [
     title: "Create Stunning AI Art with Dreamify",
     paragraph:
       "Generate unique images with Dreamify's AI-powered tools. Whether you're creating fantasy scenes or realistic portraits, Dreamify helps you turn your ideas into captivating art with just a few words.",
-    image: "images/1.jpeg",
+    image: "images/6.jpg",
   },
   {
     title: "Bring Your Imagination to Life",
@@ -37,7 +37,7 @@ const content = [
     title: "Create with Dreamify",
     paragraph:
       "Dreamify turns your ideas into stunning artwork in no time. With just a few words, the AI generates detailed, unique images, making art creation simple and accessible to everyone, regardless of skill level.",
-    image: "images/6.jpg",
+    image: "images/1.jpeg",
   },
   {
     title: "Create Art Instantly",
