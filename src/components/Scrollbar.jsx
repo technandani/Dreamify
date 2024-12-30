@@ -10,7 +10,7 @@ const data = [
   { img: "images/planet.jpg", text: "planet" },
   { img: "images/girl.jpeg", text: "girl" },
   { img: "images/snow.jpg", text: "snow" },
-  { img: "images/deepSpace.jpg", text: "Deep Space" },
+  { img: "images/deepSpace.jpg", text: "Space" },
   { img: "images/peacock.jpg", text: "peacock " },
   { img: "images/moon.jpg", text: "Moon" },
   { img: "images/boy.jpg", text: "boy" },
