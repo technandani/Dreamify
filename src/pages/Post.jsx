@@ -145,19 +145,29 @@ const Post = () => {
                   <h3>
                     No results! Press 'Generate Image' to craft your image.
                   </h3>
-                  <button
-                    className="loginBtn"
+                  <a
+                    href="/create"
                     style={{
-                      padding: "10px 20px",
-                      backgroundColor: "transparent",
-                      fontSize: "18px",
-                      boxShadow: "#fff 0 0 2px",
-                      borderRadius: "10px",
-                      margin: "20px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "10px",
                     }}
                   >
-                    <i className="fa-solid fa-paper-plane"></i> generate Image
-                  </button>
+                    <button
+                      className="loginBtn"
+                      style={{
+                        padding: "10px 20px",
+                        backgroundColor: "transparent",
+                        fontSize: "18px",
+                        boxShadow: "#fff 0 0 2px",
+                        borderRadius: "10px",
+                        margin: "20px",
+                      }}
+                    >
+                      <i className="fa-solid fa-paper-plane"></i> generate Image
+                    </button>
+                  </a>
                 </NotFound>
               </div>
             )}
