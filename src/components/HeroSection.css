@@ -32,20 +32,23 @@
     color: white;
     z-index: 10;
   }
-
-  .hero-title {
-    font-size: 3rem;
+ 
+   .hero-title {
+    font-size: 42px;
     font-weight: bold;
     margin-bottom: 15px;
     animation: fadeInDown 2s ease;
+    textShadow: "0 1px 4px rgba(0, 0, 0, 0.76)";
   }
   
   .hero-subtitle {
-    font-size: 1.2rem;
+    font-size: 20px;
     margin-bottom: 30px;
     animation: fadeInUp 2s ease;
+    textShadow: "0 1px 4px rgba(0, 0, 0, 0.78)";
   }
   
+
   .hero-button {
     padding: 15px 30px;
     font-size: 1.2rem;
@@ -104,6 +107,16 @@
 
     .hero-overlay {
       min-width:90vw;
+    }
+      
+    .hero-title {
+      font-size: 35px;
+    }
+    
+    .hero-subtitle {
+      font-size: 16px;
+      margin-bottom: 30px;
+      animation: fadeInUp 2s ease;
     }
     
   }
