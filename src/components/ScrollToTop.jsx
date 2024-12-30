@@ -9,7 +9,8 @@ const ScrollToTopBtn = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: #fff;
+  background-color: transparent;
+  box-shadow: #fff 0 0 5px;
 
   @media (max-width: 639px) {
     font-size: 22px;
@@ -56,10 +57,8 @@ const ScrollToTop = () => {
       {isVisible && (
         <ScrollToTopBtn
           onClick={scrollToTop}
-          className="p-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 focus:outline-none"
-          style={{}}
         >
-          <i className="fa-solid fa-arrow-up" style={{ color: "#0c1821" }}></i>
+          <i className="fa-solid fa-arrow-up" style={{ color: "#fff" }}></i>
         </ScrollToTopBtn>
       )}
     </div>
