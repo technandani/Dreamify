@@ -6,6 +6,7 @@ import axios from "axios";
 import Loader from "../components/Loader";
 import HeroSection from "../components/HeroSection";
 import { useSearch } from "../context/SearchContext";
+import ScrollToTop from "../components/ScrollToTop";
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -162,6 +163,7 @@ const Post = () => {
             )}
           </CardWrapper>
         </Wrapper>
+        <ScrollToTop />
       </div>
     </>
   );
